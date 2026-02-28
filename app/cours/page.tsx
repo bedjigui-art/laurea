@@ -145,43 +145,8 @@ export default function Cours() {
 
         {/* HEADER */}
         <div className="mt-8 mb-10">
-          <div className="flex items-start justify-between flex-wrap gap-4">
-            <div>
-              <h1 className="text-3xl font-extrabold text-slate-900 mb-2">Programme officiel ARES</h1>
-              <p className="text-slate-600 text-sm">2 parties · 6 matières · {totalChapitres} chapitres · Conforme au programme officiel belge</p>
-            </div>
-            <div className="flex items-center gap-3">
-              <div className="bg-[#dbeafe] border-2 border-[#93c5fd] rounded-xl px-4 py-2 text-center shadow-sm">
-                <div className="text-lg font-extrabold text-[#1d4ed8]">{totalChapitres}</div>
-                <div className="text-xs text-slate-600 font-medium">Chapitres</div>
-              </div>
-              <div className="bg-emerald-50 border-2 border-emerald-300 rounded-xl px-4 py-2 text-center shadow-sm">
-                <div className="text-lg font-extrabold text-emerald-700">3</div>
-                <div className="text-xs text-slate-600 font-medium">Complétés</div>
-              </div>
-              <div className="bg-orange-50 border-2 border-orange-300 rounded-xl px-4 py-2 text-center shadow-sm">
-                <div className="text-lg font-extrabold text-orange-600">🔥 7</div>
-                <div className="text-xs text-slate-600 font-medium">Jours streak</div>
-              </div>
-            </div>
-          </div>
-
-          {/* Barre progression globale */}
-          <div className="mt-6 bg-white border-2 border-slate-300 rounded-2xl p-5 shadow-sm">
-            <div className="flex items-center justify-between mb-3">
-              <span className="text-sm font-semibold text-slate-700">Progression globale</span>
-              <span className="text-sm font-bold text-slate-900">3 / {totalChapitres} chapitres</span>
-            </div>
-            <div className="w-full bg-slate-200 rounded-full h-3 border border-slate-300">
-              <div className="bg-gradient-to-r from-[#3b82f6] to-[#60a5fa] h-3 rounded-full transition-all" style={{ width: `${(3 / totalChapitres) * 100}%` }}></div>
-            </div>
-            <div className="flex items-center gap-5 mt-3 text-xs font-medium">
-              <span className="flex items-center gap-1.5 text-emerald-700"><span className="w-2 h-2 rounded-full bg-green-500 inline-block"></span>Maîtrisé (&gt;75%)</span>
-              <span className="flex items-center gap-1.5 text-amber-700"><span className="w-2 h-2 rounded-full bg-yellow-500 inline-block"></span>À consolider (50-75%)</span>
-              <span className="flex items-center gap-1.5 text-red-700"><span className="w-2 h-2 rounded-full bg-red-500 inline-block"></span>À retravailler (&lt;50%)</span>
-              <span className="flex items-center gap-1.5 text-slate-500"><span className="w-2 h-2 rounded-full bg-slate-300 inline-block border border-slate-400"></span>Non commencé</span>
-            </div>
-          </div>
+          <h1 className="text-3xl font-extrabold text-slate-900 mb-2">Programme officiel ARES</h1>
+          <p className="text-slate-600 text-sm">2 parties · 6 matières · {totalChapitres} chapitres · Conforme au programme officiel belge</p>
         </div>
 
         {/* PARTIES */}
@@ -218,66 +183,48 @@ export default function Cours() {
                             <div className={`text-xs font-bold uppercase tracking-widest ${mc.text} mb-0.5`}>Section {letter}</div>
                             <h3 className={`text-lg font-extrabold ${mc.text}`}>{matiere.nom}</h3>
                           </div>
-                          <div className="ml-auto flex items-center gap-2">
+                          <div className="ml-auto">
                             <span className={`text-xs px-2.5 py-1 rounded-full border-2 font-bold ${mc.badge}`}>{matiere.chapitres.length} chapitres</span>
                           </div>
                         </div>
 
                         {/* CHAPITRES */}
                         <div className="divide-y-2 divide-slate-100">
-                          {matiere.chapitres.map((chapitre, cIdx) => {
-                            const statuts = ["🟢", "🟡", "🔴", null, null, null];
-                            const scores = [88, 62, 34, null, null, null];
-                            const statut = statuts[cIdx] ?? null;
-                            const score = scores[cIdx] ?? null;
-                            return (
-                              <div key={chapitre.id} className="flex items-center gap-4 px-6 py-4 hover:bg-slate-50 transition group">
+                          {matiere.chapitres.map((chapitre) => (
+                            <div key={chapitre.id} className="flex items-center gap-4 px-6 py-4 hover:bg-slate-50 transition group">
 
-                                {/* NUMERO */}
-                                <div className={`w-8 h-8 rounded-xl flex items-center justify-center text-xs font-extrabold flex-shrink-0 border-2 ${statut ? `${mc.bg} ${mc.border}` : "bg-slate-100 border-slate-300"}`}>
-                                  <span className={statut ? mc.text : "text-slate-500"}>{chapitre.id}</span>
-                                </div>
-
-                                {/* TITRE */}
-                                <div className="flex-1 min-w-0">
-                                  <div className="flex items-center gap-2">
-                                    <span className="text-sm font-semibold text-slate-900 truncate">Chapitre {chapitre.id} — {chapitre.titre}</span>
-                                    {statut && <span className="text-sm flex-shrink-0">{statut}</span>}
-                                  </div>
-                                  {score !== null && (
-                                    <div className="flex items-center gap-2 mt-1.5">
-                                      <div className="w-24 bg-slate-200 rounded-full h-2 border border-slate-300">
-                                        <div className={`h-2 rounded-full ${score >= 75 ? "bg-green-500" : score >= 50 ? "bg-yellow-500" : "bg-red-500"}`} style={{ width: `${score}%` }}></div>
-                                      </div>
-                                      <span className={`text-xs font-bold ${score >= 75 ? "text-emerald-700" : score >= 50 ? "text-amber-700" : "text-red-700"}`}>{score}%</span>
-                                    </div>
-                                  )}
-                                  {score === null && (
-                                    <div className="text-xs text-slate-400 mt-0.5 font-medium">Non commencé</div>
-                                  )}
-                                </div>
-
-                                {/* BOUTONS */}
-                                <div className="flex items-center gap-2 flex-shrink-0">
-                                  <a
-                                    href={`/cours/${matiere.id}/${chapitre.id}`}
-                                    className={`flex items-center gap-1.5 text-xs font-bold px-3 py-2 rounded-xl border-2 transition ${mc.btn}`}
-                                  >
-                                    <span>📖</span>
-                                    <span>Leçon</span>
-                                  </a>
-                                  <a
-                                    href={`/quiz?matiere=${matiere.id}&chapitre=${chapitre.id}`}
-                                    className="flex items-center gap-1.5 text-xs font-bold px-3 py-2 rounded-xl border-2 bg-slate-50 hover:bg-slate-100 border-slate-300 text-slate-700 transition"
-                                  >
-                                    <span>⚡</span>
-                                    <span>Quiz</span>
-                                  </a>
-                                </div>
-
+                              {/* NUMERO */}
+                              <div className="w-8 h-8 rounded-xl flex items-center justify-center text-xs font-extrabold flex-shrink-0 border-2 bg-slate-100 border-slate-300">
+                                <span className="text-slate-500">{chapitre.id}</span>
                               </div>
-                            );
-                          })}
+
+                              {/* TITRE */}
+                              <div className="flex-1 min-w-0">
+                                <span className="text-sm font-semibold text-slate-900">
+                                  Chapitre {chapitre.id} — {chapitre.titre}
+                                </span>
+                              </div>
+
+                              {/* BOUTONS */}
+                              <div className="flex items-center gap-2 flex-shrink-0">
+                                <a
+                                  href={`/cours/${matiere.id}/${chapitre.id}`}
+                                  className={`flex items-center gap-1.5 text-xs font-bold px-3 py-2 rounded-xl border-2 transition ${mc.btn}`}
+                                >
+                                  <span>📖</span>
+                                  <span>Leçon</span>
+                                </a>
+                                <a
+                                  href={`/quiz?matiere=${matiere.id}&chapitre=${chapitre.id}`}
+                                  className="flex items-center gap-1.5 text-xs font-bold px-3 py-2 rounded-xl border-2 bg-slate-50 hover:bg-slate-100 border-slate-300 text-slate-700 transition"
+                                >
+                                  <span>⚡</span>
+                                  <span>Quiz</span>
+                                </a>
+                              </div>
+
+                            </div>
+                          ))}
                         </div>
 
                       </div>
