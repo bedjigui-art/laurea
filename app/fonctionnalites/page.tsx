@@ -115,11 +115,11 @@ export default function Fonctionnalites() {
             <div className="inline-block bg-[#dbeafe] border-2 border-[#93c5fd] text-[#1d4ed8] text-xs font-semibold px-3 py-1 rounded-full mb-4 uppercase tracking-widest">01 — Cours</div>
             <h2 className="text-2xl md:text-3xl font-bold mb-4 text-slate-900">Des cours structurés couvrant l'intégralité du programme ARES</h2>
             <p className="text-slate-600 leading-relaxed mb-6 text-sm md:text-base">
-              25 chapitres répartis sur les 7 matières officielles du concours. Chaque leçon est rédigée avec des explications claires, des exemples concrets tirés des vraies annales ARES et des schémas visuels.
+              25 chapitres répartis sur les 6 matières officielles du concours. Chaque leçon est rédigée avec des explications claires, des exemples concrets tirés des vraies annales ARES et des schémas visuels.
             </p>
             <div className="space-y-3 mb-8">
               {[
-                "7 matières officielles : Maths, Chimie, Physique, Biologie, Compréhension, Logique, Sensibilité",
+                "6 matières officielles : Maths, Chimie, Physique, Biologie, Compréhension, Logique, Sensibilité",
                 "25 chapitres organisés de façon progressive et structurée",
                 "Surlignage et notes personnelles sauvegardées dans ton compte",
                 "Barre de progression visible sur chaque chapitre",
